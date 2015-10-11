@@ -111,9 +111,25 @@ class SiteController extends Controller
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */
+	public function actionRegistration()
+	{
+		$model = new User;
+		
+		if(isset($_POST['User'])){
+			$model->attributes = $_POST['User'];
+			//if($model->validate()){
+				$model->save();
+				$this->redirect(Yii::app()->createUrl('site/index'));
+			//}
+		}
+		$this->render('Registration',array('model'=>$model));
+	}
+
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+
 }

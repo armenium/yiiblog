@@ -7,11 +7,10 @@
  * @property integer $id
  * @property string $username
  * @property integer $password
- * @property integer $salt
  * @property string $email
- * @property integer $profile
+ * @property string $login
+ * @property string $usersurname
  */
-
 class User extends CActiveRecord
 {
 	/**
@@ -30,12 +29,13 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, salt, email, profile', 'required'),
-			array('password, salt, profile', 'numerical', 'integerOnly'=>true),
-			array('username', 'length', 'max'=>255),
+			array('login, password','required'),
+			array('email, username, usersurname', 'required'),
+			array('password', 'numerical', 'integerOnly'=>true),
+			array('username, login, usersurname', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, password, salt, email, profile', 'safe', 'on'=>'search'),
+			array('id, username, password, email, login, usersurname', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,9 +59,9 @@ class User extends CActiveRecord
 			'id' => 'ID',
 			'username' => 'Username',
 			'password' => 'Password',
-			'salt' => 'Salt',
 			'email' => 'Email',
-			'profile' => 'Profile',
+			'login' => 'Login',
+			'usersurname' => 'Usersurname',
 		);
 	}
 
@@ -86,9 +86,9 @@ class User extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password);
-		$criteria->compare('salt',$this->salt);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('profile',$this->profile);
+		$criteria->compare('login',$this->login,true);
+		$criteria->compare('usersurname',$this->usersurname,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
