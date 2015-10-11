@@ -35,7 +35,8 @@ class SiteController extends Controller
 		if(Yii::app()->user->isGuest){
 			$this->render('index',array('posts'=>$posts,));	
 		}else{
-			$this->redirect(Yii::app()->createUrl('post/admin'));
+			//$this->redirect(Yii::app()->createUrl('post/admin'));
+			$this->render('index',array('posts'=>$posts,));
 		}
 		
 	}
@@ -101,7 +102,13 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
 			 if($model->validate() && $model->login()){
 				//$this->redirect(Yii::app()->user->returnUrl);
-				$this->redirect(Yii::app()->createUrl('post/admin'));
+				if(Yii::app()->user->userid == 'admin'){
+					$this->redirect(Yii::app()->createUrl('post/admin'));
+				}else{
+
+					$this->redirect(Yii::app()->createUrl('site/index'));
+
+				}
 			}
 		}
 		// display the login form

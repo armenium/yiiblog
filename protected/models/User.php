@@ -109,6 +109,7 @@ class User extends CActiveRecord
 		$login = User::model()->find('login=:login',array(':login'=>$user_login));
 		if($login){
 			return false;
+			//$this->addError('login','This login is registered');
 		}
 		return true;
 	}

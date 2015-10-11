@@ -100,6 +100,7 @@ function getPageUrl($page){
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); 
+				
 		?>
                 </ul>
 
