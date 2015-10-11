@@ -116,11 +116,12 @@ class SiteController extends Controller
 		$model = new User;
 		
 		if(isset($_POST['User'])){
+			$user_login = $_POST['User']['login'];
 			$model->attributes = $_POST['User'];
-			//if($model->validate()){
+			if($model->validate() && $model->validateUser($user_login)){
 				$model->save();
 				$this->redirect(Yii::app()->createUrl('site/index'));
-			//}
+			}
 		}
 		$this->render('Registration',array('model'=>$model));
 	}

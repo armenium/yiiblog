@@ -105,4 +105,11 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	public function validateUser($user_login){
+		$login = User::model()->find('login=:login',array(':login'=>$user_login));
+		if($login){
+			return false;
+		}
+		return true;
+	}
 }
